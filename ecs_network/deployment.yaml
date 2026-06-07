@@ -1,4 +1,4 @@
-template-file-path: ./ecs_network/network.yaml
+template-file-path: /ecs_network/network.yaml
 
 parameters:
   - parameter-key: EnvironmentName
