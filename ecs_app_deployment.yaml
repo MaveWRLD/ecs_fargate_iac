@@ -1,0 +1,9 @@
+template-file-path: ./app.yaml
+
+parameters:
+  EnvironmentName: ecs-fargate-demo
+  ECRImageUri: REPLACE_WITH_ECR_IMAGE_URI
+  ECRRepositoryName: REPLACE_WITH_ECR_REPO_NAME
+
+tags:
+  ManagedBy: GitSync
