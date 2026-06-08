@@ -2,8 +2,8 @@ template-file-path: ./app.yaml
 
 parameters:
   EnvironmentName: ecs-fargate-demo
-  ECRImageUri: REPLACE_WITH_ECR_IMAGE_URI
-  ECRRepositoryName: REPLACE_WITH_ECR_REPO_NAME
+  ECRImageUri: 481980074895.dkr.ecr.eu-central-1.amazonaws.com/containerization-demo:2be2d9d26b093fc7d26e9c17c2a32aff143b405e
+  ECRRepositoryName: containerization-demo
 
 tags:
   ManagedBy: GitSync
