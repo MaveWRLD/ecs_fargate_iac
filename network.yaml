@@ -309,7 +309,7 @@ Resources:
       Protocol: HTTP
       TargetType: ip
       VpcId: !Ref VPC
-      HealthCheckPath: /
+      HealthCheckPath: /actuator/health
       HealthCheckProtocol: HTTP
       HealthCheckIntervalSeconds: 30
       HealthCheckTimeoutSeconds: 5
@@ -327,7 +327,7 @@ Resources:
       Protocol: HTTP
       TargetType: ip
       VpcId: !Ref VPC
-      HealthCheckPath: /
+      HealthCheckPath: /actuator/health
       HealthCheckProtocol: HTTP
       HealthCheckIntervalSeconds: 30
       HealthCheckTimeoutSeconds: 5
