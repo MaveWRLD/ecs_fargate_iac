@@ -102,15 +102,15 @@ Resources:
         - Key: Name
           Value: !Sub ${EnvironmentName}-private-subnet-2
 
-  NatGateway:
-    Type: AWS::EC2::NatGateway
-    DependsOn: InternetGatewayAttachment
-    Properties:
-      AvailabilityMode: regional
-      VpcId: !Ref VPC
-      Tags:
-        - Key: Name
-          Value: !Sub ${EnvironmentName}-nat-gw
+  # NatGateway:
+  #   Type: AWS::EC2::NatGateway
+  #   DependsOn: InternetGatewayAttachment
+  #   Properties:
+  #     AvailabilityMode: regional
+  #     VpcId: !Ref VPC
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub ${EnvironmentName}-nat-gw
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -148,12 +148,12 @@ Resources:
         - Key: Name
           Value: !Sub ${EnvironmentName}-private-rt
 
-  PrivateRoute:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref PrivateRouteTable
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGateway
+  # PrivateRoute:
+  #   Type: AWS::EC2::Route
+  #   Properties:
+  #     RouteTableId: !Ref PrivateRouteTable
+  #     DestinationCidrBlock: 0.0.0.0/0
+  #     NatGatewayId: !Ref NatGateway
 
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
