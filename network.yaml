@@ -1,7 +1,7 @@
-# AWSTemplateFormatVersion: '2010-09-09'
-# Description: >
-#   Network stack - VPC, subnets, NAT gateway, VPC endpoints, security groups,
-#   ALB, and target groups for ECS Fargate blue/green deployments.
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Network stack - VPC, subnets, NAT gateway, VPC endpoints, security groups,
+  ALB, and target groups for ECS Fargate blue/green deployments.
 
 # Parameters:
 #   EnvironmentName:
