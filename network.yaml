@@ -102,16 +102,6 @@ Resources:
         - Key: Name
           Value: !Sub ${EnvironmentName}-private-subnet-2
 
-  # NatGateway:
-  #   Type: AWS::EC2::NatGateway
-  #   DependsOn: InternetGatewayAttachment
-  #   Properties:
-  #     AvailabilityMode: regional
-  #     VpcId: !Ref VPC
-  #     Tags:
-  #       - Key: Name
-  #         Value: !Sub ${EnvironmentName}-nat-gw
-
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -147,13 +137,6 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-private-rt
-
-  # PrivateRoute:
-  #   Type: AWS::EC2::Route
-  #   Properties:
-  #     RouteTableId: !Ref PrivateRouteTable
-  #     DestinationCidrBlock: 0.0.0.0/0
-  #     NatGatewayId: !Ref NatGateway
 
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -218,6 +201,32 @@ Resources:
       SecurityGroupIds:
         - !Ref VPCEndpointSecurityGroup
 
+  SecretsManagerEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref VPC
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.secretsmanager
+      VpcEndpointType: Interface
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
+      SecurityGroupIds:
+        - !Ref VPCEndpointSecurityGroup
+
+  SSMEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref VPC
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.ssm
+      VpcEndpointType: Interface
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
+      SecurityGroupIds:
+        - !Ref VPCEndpointSecurityGroup
+
   # ---------------------------------------------------------------------------
   # Security groups
   # ---------------------------------------------------------------------------
@@ -245,11 +254,6 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
-      SecurityGroupEgress:
-        - IpProtocol: -1
-          FromPort: -1
-          ToPort: -1
-          CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-alb-sg
@@ -264,11 +268,6 @@ Resources:
           FromPort: !Ref ContainerPort
           ToPort: !Ref ContainerPort
           SourceSecurityGroupId: !Ref ALBSecurityGroup
-      SecurityGroupEgress:
-        - IpProtocol: -1
-          FromPort: -1
-          ToPort: -1
-          CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-ecs-sg
