@@ -254,6 +254,11 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: !Ref ContainerPort
+          ToPort: !Ref ContainerPort
+          CidrIp: !Ref VpcCidr
       Tags:
         - Key: Name
           Value: !Sub ${EnvironmentName}-alb-sg
