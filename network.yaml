@@ -33,7 +33,9 @@ Description: >
 #     Type: Number
 #     Default: 8080
 
-# Resources:
+Resources:
+  Placeholder:
+      Type: AWS::CloudFormation::WaitConditionHandle
 #   # ---------------------------------------------------------------------------
 #   # VPC + networking
 #   # ---------------------------------------------------------------------------
