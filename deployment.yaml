@@ -1,7 +1,7 @@
 template-file-path: ./network.yaml
 
-parameters:
-  EnvironmentName: ecs-fargate-demo
+# parameters:
+#   EnvironmentName: ecs-fargate-demo
 
 tags:
   ManagedBy: GitSync
